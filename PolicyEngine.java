@@ -18,6 +18,28 @@ public class PolicyEngine {
         abstract double monthlyPremium();
     }
 
+    class LifePolicy extends Policy {
+        LifePolicy(String holder) {
+            super(holder);
+        }
+
+        @Override
+        double monthlyPremium() {
+            return 50.0;
+        }
+    }
+
+    class CarPolicy extends Policy {
+        CarPolicy(String holder) {
+            super(holder);
+        }
+
+        @Override
+        double monthlyPremium() {
+            return 120.0;
+        }
+    }
+    
     public static void main(String[] args) {
         
     }
