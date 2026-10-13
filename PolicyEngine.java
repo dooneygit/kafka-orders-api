@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class PolicyEngine {
 
     abstract class Policy {
@@ -18,7 +20,7 @@ public class PolicyEngine {
         abstract double monthlyPremium();
     }
 
-    class LifePolicy extends Policy {
+    class LifePolicy extends Policy implements Printable{
         LifePolicy(String holder) {
             super(holder);
         }
@@ -27,9 +29,14 @@ public class PolicyEngine {
         double monthlyPremium() {
             return 50.0;
         }
+
+        @Override
+        public void print() {
+            System.out.println("Life Policy for " + getHolder());
+        }
     }
 
-    class CarPolicy extends Policy {
+    class CarPolicy extends Policy implements Printable {
         CarPolicy(String holder) {
             super(holder);
         }
@@ -38,9 +45,32 @@ public class PolicyEngine {
         double monthlyPremium() {
             return 120.0;
         }
+
+        @Override
+        public void print() {
+            System.out.println("Car Policy for " + getHolder());
+        }
     }
-    
+
+    interface Printable {
+        void print();
+    }
+
     public static void main(String[] args) {
-        
+        LifePolicy lifePolicy = new LifePolicy("Dooney");
+        lifePolicy.print();
+
+        CarPolicy carPolicy = new CarPolicy("Dooney");
+        carPolicy.print();
+
+        List<Policy> policies = new ArrayList<>();
+        policies.add(lifePolicy);
+        policies.add(carPolicy);
+
+        for(Policy policy : policies) {
+            System.out.println("Holder: " + policy.getHolder());
+            System.out.println("Monthly premium: " + policy.monthlyPremium());
+        }
     }
 }
+
