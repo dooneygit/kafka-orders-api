@@ -5,10 +5,14 @@ public class PolicyEngine {
         policy.setHolder("Changed");
     }
 
-    static void replace(Policy policy) {
-        policy = new LifePolicy("New");
+    static void placeOrder(double amount) throws Exception {
+        if (amount <= 0) {
+            throw new Exception("Order amount must be positive");
+        }
+
+        System.out.println("Order placed");
     }
-    
+
     public static void main(String[] args) {
         LifePolicy lifePolicy = new LifePolicy("Dooney");
         lifePolicy.print();
@@ -23,6 +27,17 @@ public class PolicyEngine {
         for(Policy policy : policies) {
             System.out.println("Holder: " + policy.getHolder());
             System.out.println("Monthly premium: " + policy.monthlyPremium());
+        }
+
+        rename(lifePolicy);
+        lifePolicy.print();
+
+        try {
+            placeOrder(50)
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            System.out.println("Order attempt finished");
         }
     }
 }
