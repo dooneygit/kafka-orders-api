@@ -33,7 +33,7 @@ public class PolicyEngine {
         lifePolicy.print();
 
         try {
-            placeOrder(50)
+            placeOrder(50);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
