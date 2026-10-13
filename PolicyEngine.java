@@ -1,61 +1,14 @@
 import java.util.*;
 
 public class PolicyEngine {
-
-    abstract class Policy {
-        private String holder;
-
-        Policy(String holder) {
-            this.holder = holder;
-        }
-
-        public String getHolder() {
-            return holder;
-        }
-        
-        public void setHolder(String holder) {
-            this.holder = holder;
-        }
-
-        abstract double monthlyPremium();
+    static void rename(Policy policy) {
+        policy.setHolder("Changed");
     }
 
-    class LifePolicy extends Policy implements Printable{
-        LifePolicy(String holder) {
-            super(holder);
-        }
-
-        @Override
-        double monthlyPremium() {
-            return 50.0;
-        }
-
-        @Override
-        public void print() {
-            System.out.println("Life Policy for " + getHolder());
-        }
+    static void replace(Policy policy) {
+        policy = new LifePolicy("New");
     }
-
-    class CarPolicy extends Policy implements Printable {
-        CarPolicy(String holder) {
-            super(holder);
-        }
-
-        @Override
-        double monthlyPremium() {
-            return 120.0;
-        }
-
-        @Override
-        public void print() {
-            System.out.println("Car Policy for " + getHolder());
-        }
-    }
-
-    interface Printable {
-        void print();
-    }
-
+    
     public static void main(String[] args) {
         LifePolicy lifePolicy = new LifePolicy("Dooney");
         lifePolicy.print();
@@ -72,5 +25,59 @@ public class PolicyEngine {
             System.out.println("Monthly premium: " + policy.monthlyPremium());
         }
     }
+}
+
+abstract class Policy {
+    private String holder;
+
+    Policy(String holder) {
+        this.holder = holder;
+    }
+
+    public String getHolder() {
+        return holder;
+    }
+    
+    public void setHolder(String holder) {
+        this.holder = holder;
+    }
+
+    abstract double monthlyPremium();
+}
+
+class LifePolicy extends Policy implements Printable{
+    LifePolicy(String holder) {
+        super(holder);
+    }
+
+    @Override
+    double monthlyPremium() {
+        return 50.0;
+    }
+
+    @Override
+    public void print() {
+        System.out.println("Life Policy for " + getHolder());
+    }
+}
+
+class CarPolicy extends Policy implements Printable {
+    CarPolicy(String holder) {
+        super(holder);
+    }
+
+    @Override
+    double monthlyPremium() {
+        return 120.0;
+    }
+
+    @Override
+    public void print() {
+        System.out.println("Car Policy for " + getHolder());
+    }
+}
+
+interface Printable {
+    void print();
 }
 
